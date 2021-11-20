@@ -25,8 +25,8 @@ function App() {
               rows={rows}
               tableData={tableData}
               bordered
-              // editHandler={(e) => console.log("edit", e)}
-              // deleteHandler={(e) => console.log("delete", e)}
+              editHandler={(e) => console.log("edit", e)}
+              deleteHandler={(e) => console.log("delete", e)}
             />
           </div>
         </div>

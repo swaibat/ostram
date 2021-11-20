@@ -1,21 +1,28 @@
 import React, { FunctionComponent } from "react";
-import Table from "./Table";
-import TextField from "./textField";
+import Form from "./Form";
+
 import CloseBtn from "./CloseBtn";
 import "./model.scss";
 
 const Modal: FunctionComponent = () => {
-  const tableData = [
-    {
-      id: "122",
-      firstName: <TextField label="First Name" name="firstName" />,
-      lastName: <TextField label="Last Name" name="lastName" />,
-      DOB: <TextField label="Date of Birth" name="DOB" />,
-      course: <TextField label="course" name="course" />,
-      hours: <TextField label="Hours" name="hours" />,
-      price: <TextField label="Price" name="price" />,
-    },
+  const fields = [
+    { label: "First Name", name: "firstName" },
+    { label: "Last Name", name: "lastName" },
+    { label: "Date Of Birth", name: "DOB" },
+    { label: "Course", name: "course" },
+    { label: "Hours", name: "hours" },
+    { label: "price", name: "price" },
   ];
+  const formData = {
+    id: "122",
+    firstName: "john",
+    lastName: "doe",
+    DOB: new Date("2015.03.25").toDateString(),
+    course: "Python",
+    hours: "100H",
+    price: "$1160",
+  };
+
   return (
     <>
       <label className="btn" htmlFor="modal">
@@ -29,7 +36,7 @@ const Modal: FunctionComponent = () => {
               <span className="modal-label">Add Student</span>
               <CloseBtn />
             </div>
-            <Table tableData={tableData} />
+            <Form fields={fields} formData={formData} />
           </div>
           <div className="model-footer">
             <button className="btn-sm">Save</button>

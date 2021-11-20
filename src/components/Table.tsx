@@ -14,17 +14,17 @@ interface TableProps {
   rows?: Array<String>;
   tableData: Array<IProps>;
   bordered?: Boolean;
-  // editHandler?: (data: IProps) => void;
-  // deleteHandler?: (data: IProps) => void;
+  editHandler: (data: IProps) => void;
+  deleteHandler: (data: IProps) => void;
 }
 
 const Table: FunctionComponent<TableProps> = ({
   rows,
   tableData,
   bordered,
-}: // editHandler,
-// deleteHandler,
-TableProps) => (
+  editHandler,
+  deleteHandler,
+}: TableProps) => (
   <table>
     <thead style={!bordered ? { border: "none" } : {}}>
       <tr>{rows && rows.map((row, index) => <th key={index}>{row}</th>)}</tr>
@@ -40,14 +40,14 @@ TableProps) => (
             <td data-label={row.course}>{row.course}</td>
             <td data-label={row.hours}>{row.hours}</td>
             <td data-label={row.price}>{row.price}</td>
-            {/* <td>
-                <button id={row.id} onClick={() => row editHandler(row)}>
-                  edit
+            <td>
+              <button id={row.id} onClick={() => editHandler(row)}>
+                edit
               </button>
               <button id={row.id} onClick={() => deleteHandler(row)}>
-                  delete
-                </button>
-              </td> */}
+                delete
+              </button>
+            </td>
           </tr>
         ))}
     </tbody>

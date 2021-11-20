@@ -7,7 +7,7 @@
   background: #e5e5e5;
   z-index: 99999;
   opacity: 0;
-  transition: opacity .25s ease;
+  transition: opacity 0.25s ease;
   visibility: hidden;
   .model-container {
     max-width: 1063px;
@@ -52,7 +52,7 @@
 
 .text-input {
   display: block;
-  width: 90%;
+  width: 100%;
   padding: 9px 13px;
   font-size: 14px;
   line-height: 20px;
@@ -61,6 +61,7 @@
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
+  box-sizing: border-box;
 }
 
 .text-field {
@@ -137,4 +138,25 @@
 }
 #modal {
   display: none;
+}
+
+.text-field {
+  &:first-child {
+    width: 150px;
+  }
+  &:nth-child(2) {
+    width: 150px;
+  }
+  &:nth-child(3) {
+    width: 104px;
+  }
+  &:nth-child(4) {
+    width: 300px;
+  }
+  &:nth-child(5) {
+    width: 79px;
+  }
+  &:nth-child(6) {
+    width: 145px;
+  }
 }
