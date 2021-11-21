@@ -1,7 +1,11 @@
-import { FunctionComponent } from "react";
+import { FC } from "react";
 
-const CloseBtn: FunctionComponent = () => (
-  <label htmlFor="modal" className="close-btn">
+interface Props {
+  onClick: (event: any) => void;
+}
+
+const CloseBtn: FC<Props> = ({ onClick }: Props) => (
+  <button onClick={onClick} className="close-btn">
     <svg
       width="14"
       height="14"
@@ -14,7 +18,7 @@ const CloseBtn: FunctionComponent = () => (
         fill="black"
       />
     </svg>
-  </label>
+  </button>
 );
 
 export default CloseBtn;
