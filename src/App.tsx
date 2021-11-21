@@ -19,18 +19,6 @@ const rows = [
   "Price",
 ];
 
-// students: [
-//   {
-//     id: "122",
-//     firstName: "john",
-//     lastName: "doe",
-//     DOB: new Date("2015.03.25").toDateString(),
-//     course: "Python",
-//     hours: "100H",
-//     price: "$1160",
-//   },
-// ],
-
 interface IUser {
   id: string;
   firstName: string;
@@ -44,31 +32,45 @@ interface IUser {
 function App() {
   const [student, setStudent] = useState<IUser>({} as IUser);
   const [students, setStudents] = useState([] as Array<IUser>);
-  const [formOpen, setFormOpen] = useState(true);
+  const [formOpen, setFormOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
-  const handleDelete = (data: any) => {};
+  const handleDelete = (id: any) => {
+    console.log(id);
+  };
+
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setStudent({ ...student, [name]: value });
+  };
+
   const handleEdit = (data: any) => {
     setStudent(data);
     setEditMode(true);
   };
-  const handleSubmit = (data: any) => {
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setFormOpen(!formOpen);
     if (editMode) {
       const updatedStudents = students.map((user) => {
         if (user.id === student.id) {
-          user = { ...user, ...data };
+          user = student;
         }
         return user;
       });
       setStudents([...updatedStudents]);
-      setEditMode(true);
+      setEditMode(false);
       return;
     }
-    setStudents([...students, data]);
+    student.id = Math.random().toString(36).slice(2);
+    setStudents([...students, student]);
   };
+
   const handleOpenForm = () => {
     setFormOpen(!formOpen);
   };
+
   return (
     <div className="content-wrapper">
       <div className="container">
@@ -83,6 +85,8 @@ function App() {
               setIsOpen={setFormOpen}
               onSubmit={handleSubmit}
               formData={student}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
             />
           ) : (
             <div className="table">

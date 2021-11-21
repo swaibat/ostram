@@ -27,7 +27,8 @@ const Table: FC<TableProps> = ({
   deleteHandler,
 }: TableProps) => {
   const handleEdit = (row: User) => {
-    row.price = parseInt(row.price?.replace(/,/g, ""));
+    console.log("handleEdit", row);
+    row.price = row.price && parseInt(row.price.replace(/,/g, ""));
     editHandler(row);
     setFormOpen(true);
   };
@@ -42,8 +43,8 @@ const Table: FC<TableProps> = ({
       </thead>
       <tbody>
         {tableData && tableData.length ? (
-          tableData.map((row) => (
-            <tr key={row.id}>
+          tableData.map((row, index) => (
+            <tr key={index}>
               <td data-label={row.firstName}>{row.firstName}</td>
               <td data-label={row.lastName}>{row.lastName}</td>
               <td data-label={row.DOB}>{row.DOB}</td>

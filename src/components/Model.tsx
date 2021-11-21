@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import TextField from "./textField";
 import CloseBtn from "./CloseBtn";
 import "./model.scss";
@@ -13,31 +13,18 @@ interface FormProps {
   isOpen: Boolean;
   setIsOpen: (values: any) => void;
   onSubmit: (values: any) => void;
+  handleChange: (values: any) => void;
+  handleSubmit: (any: any) => void;
 }
 
 const Form: FC<FormProps> = ({
   formData,
   fields,
   isOpen,
-  onSubmit,
-  setIsOpen
+  setIsOpen,
+  handleChange,
+  handleSubmit,
 }: FormProps) => {
-  const [values, setValues] = useState({});
-
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: name === "price" ? parseInt(value).toLocaleString() : value,
-    });
-    console.log(values);
-  };
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    onSubmit(values);
-    setIsOpen(!isOpen);
-  };
 
   const handleOpenForm = () => {
     setIsOpen(!isOpen);
@@ -51,11 +38,12 @@ const Form: FC<FormProps> = ({
             <span className="modal-label">Add Student</span>
             <CloseBtn onClick={handleOpenForm} />
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <div className="model-body">
               <div className="form-row">
-                {fields.map((field) => (
+                {fields.map((field, index) => (
                   <TextField
+                    key={index}
                     label={field.label}
                     name={field.name}
                     type={field.type}
