@@ -1,11 +1,12 @@
 import { FC, HTMLInputTypeAttribute } from "react";
+import styles from "../app.module.scss";
 
 interface TProps {
   label: string;
   name: string;
-  value: any;
+  value?: any;
   type?: HTMLInputTypeAttribute;
-  onChange: (value: any) => void;
+  onChange?: any;
 }
 
 const TextField: FC<TProps> = ({
@@ -14,20 +15,24 @@ const TextField: FC<TProps> = ({
   value,
   type,
   onChange,
-}: TProps) => (
-  <div className="text-field">
+}: TProps) => {
+  const handleChange = (e: any) => {
+    onChange(e)
+  }
+  return <div className={styles.textField}>
     <span>
-      <label>{label}</label>
+      <label htmlFor={name}>{label}</label>
     </span>
     <input
       name={name}
-      onChange={(e) => onChange(e)}
-      className="text-input"
+      id={name}
+      onChange={handleChange}
+      className={styles.textInput}
       value={value}
       type={type}
       required
     />
   </div>
-);
+};
 
 export default TextField;
